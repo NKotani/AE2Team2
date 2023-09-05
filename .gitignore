@@ -19,3 +19,13 @@
 
 # Go workspace file
 go.work
+
+## db
+mysql-store
+mysql-logs
+
+## client
+node_modules
+
+# Mac
+.DS_Store
