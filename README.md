@@ -1,25 +1,56 @@
-# AE2Team2
-## 運用ルール
-- GithubのProjects機能を使って全体を管理
-- IsuueのDevelopmentにブランチを紐づける
-<img width="985" alt="スクリーンショット 2023-09-05 10 23 32" src="https://github.com/NKotani/AE2Team2/assets/82433118/f4f099b8-b0bc-4379-b24b-86dab03b301a">
+# vue-go-samples
+Vue/Vuex + Go/Gin + MySQLを使ったサンプルアプリ
 
-- コメントになるべくスクショ貼る
-- ブランチ名: Issueの内容のキーワード＋Issue番号を入れる ex) docker_env#1
-- プルリク出して1人以上にみてもらう
-  - 開発後半(水曜午後から)は無視してもOK
-  - プルリク出したらZoomかDiscordで連絡
+- Todolist
 
-## 使い方
-```bash
-docker-compose up -d
+- Searcher
+
+## Todolist
+
+![Todolist](./src/front/public/img/TodoList.png)
+
+認証ありの簡単なTODOリストアプリ。
+
+## Searcher
+
+![Searcher](./src/front/public/img/Searcher.png)
+
+goroutine/channelを使った複数Webサービスを横断した検索アプリ。
+
+## 技術スタック
+
+### フロントエンド
+
+- vue
+- vuex
+- vueRouter
+- vuetify
+- vuelidate
+
+### サーバーサイド
+- golang
+- gin
+- gorm
+- gin-gwt
+- sql-migrate
+
+## セットアップ
 ```
-フロント
-```bash
-docker container exec -it teamB-client bash
-npm install -g @vue/cli
-vue create teamb-vue # vue2を選択
-cd teamb-vue
-yarn serve
+$ git clone https://github.com/shinjiezumi/vue-go-samples.git
+$ cd vue-go-samples
+$ docker-compose up -d
+$ docker-compose exec api bash
+$ sql-migrate up
+$ cp .env.example .env // Secretなどを設定
+$ docker-compose exec front npm install
 ```
-`http://localhost:8080/` にアクセスすると見える
+
+## サーバー起動
+
+```
+$ bash scripts/start-api.sh
+$ bash scripts/start-front.sh
+```
+
+http://localhost:8080 開く
+

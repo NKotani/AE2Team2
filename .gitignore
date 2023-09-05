@@ -20,12 +20,12 @@
 # Go workspace file
 go.work
 
-## db
-mysql-store
-mysql-logs
-
 ## client
 node_modules
+
+## db
+docker/mysql/data
+log
 
 # Mac
 .DS_Store
