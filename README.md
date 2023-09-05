@@ -14,3 +14,12 @@
 ```bash
 docker-compose up -d
 ```
+フロント
+```bash
+docker container exec -it teamB-client bash
+npm install -g @vue/cli
+vue create teamb-vue # vue2を選択
+cd teamb-vue
+yarn serve
+```
+`http://localhost:8080/` にアクセスすると見える
