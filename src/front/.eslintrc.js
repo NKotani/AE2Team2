@@ -15,4 +15,14 @@ module.exports = {
       }
     ],
   },
+  // overrides: [
+  //   {
+  //     rules: {
+  //       "vue/multi-word-component-names": 0,
+  //     },
+  //     files: [
+  //       "src/views/**/*.vue",
+  //     ],
+  //   },
+  // ],
 }
