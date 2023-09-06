@@ -69,85 +69,85 @@
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate';
-import {
-  email, maxLength, minLength, required,
-} from 'vuelidate/lib/validators';
-import { mapGetters } from 'vuex';
-import { generateTitle } from '@/util';
+// import { validationMixin } from 'vuelidate';
+// import {
+//   email, maxLength, minLength, required,
+// } from 'vuelidate/lib/validators';
+// import { mapGetters } from 'vuex';
+// import { generateTitle } from '@/util';
 
 export default {
-  name: 'Login',
-  title: generateTitle('会員登録'),
-  mixins: [validationMixin],
-  created() {
-    this.$store.commit('error/clearError');
-  },
-  validations: {
-    name: { required, maxLength: maxLength(255) },
-    email: { required, email, maxLength: maxLength(255) },
-    password: { required, minLength: minLength(8), maxLength: maxLength(16) },
-  },
-  data() {
-    return {
-      name: '',
-      email: '',
-      password: '',
-    };
-  },
-  computed: {
-    nameErrors() {
-      const errors = [];
-      if (!this.$v.name.$dirty) return errors;
+  // name: 'Login',
+  // title: generateTitle('会員登録'),
+  // mixins: [validationMixin],
+  // created() {
+  //   this.$store.commit('error/clearError');
+  // },
+  // validations: {
+  //   name: { required, maxLength: maxLength(255) },
+  //   email: { required, email, maxLength: maxLength(255) },
+  //   password: { required, minLength: minLength(8), maxLength: maxLength(16) },
+  // },
+  // data() {
+  //   return {
+  //     name: '',
+  //     email: '',
+  //     password: '',
+  //   };
+  // },
+  // computed: {
+  //   nameErrors() {
+  //     const errors = [];
+  //     if (!this.$v.name.$dirty) return errors;
 
-      !this.$v.name.required && errors.push('ユーザー名を入力してください');
-      !this.$v.name.maxLength && errors.push('ユーザー名は255文字以下で入力してください');
+  //     !this.$v.name.required && errors.push('ユーザー名を入力してください');
+  //     !this.$v.name.maxLength && errors.push('ユーザー名は255文字以下で入力してください');
 
-      return errors;
-    },
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
+  //     return errors;
+  //   },
+  //   emailErrors() {
+  //     const errors = [];
+  //     if (!this.$v.email.$dirty) return errors;
 
-      !this.$v.email.required && errors.push('メールアドレスを入力してください');
-      !this.$v.email.email && errors.push('メールアドレスの形式が不正です');
-      !this.$v.email.maxLength && errors.push('メールアドレスは255文字以下で入力してください');
+  //     !this.$v.email.required && errors.push('メールアドレスを入力してください');
+  //     !this.$v.email.email && errors.push('メールアドレスの形式が不正です');
+  //     !this.$v.email.maxLength && errors.push('メールアドレスは255文字以下で入力してください');
 
-      return errors;
-    },
-    passwordErrors() {
-      const errors = [];
-      if (!this.$v.password.$dirty) return errors;
+  //     return errors;
+  //   },
+  //   passwordErrors() {
+  //     const errors = [];
+  //     if (!this.$v.password.$dirty) return errors;
 
-      !this.$v.password.required && errors.push('パスワードを入力してください');
-      (!this.$v.password.minLength || !this.$v.password.maxLength)
-      && errors.push('パスワードは8文字以上16文字以下で入力してください');
+  //     !this.$v.password.required && errors.push('パスワードを入力してください');
+  //     (!this.$v.password.minLength || !this.$v.password.maxLength)
+  //     && errors.push('パスワードは8文字以上16文字以下で入力してください');
 
-      return errors;
-    },
-    ...mapGetters('error', ['getError']),
-  },
-  methods: {
-    async register() {
-      this.$v.$touch();
-      if (this.$v.$invalid) return;
+  //     return errors;
+  //   },
+  //   ...mapGetters('error', ['getError']),
+  // },
+  // methods: {
+  //   async register() {
+  //     this.$v.$touch();
+  //     if (this.$v.$invalid) return;
 
-      await this.$store.dispatch('auth/register', {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-      });
+  //     await this.$store.dispatch('auth/register', {
+  //       name: this.name,
+  //       email: this.email,
+  //       password: this.password,
+  //     });
 
-      if (this.getError === '') {
-        const getUser = async () => {
-          await this.$store.dispatch('auth/currentUser');
-          this.$router.push('/todos');
-        };
+  //     if (this.getError === '') {
+  //       const getUser = async () => {
+  //         await this.$store.dispatch('auth/currentUser');
+  //         this.$router.push('/todos');
+  //       };
 
-        getUser();
-      }
-    },
-  },
+  //       getUser();
+  //     }
+  //   },
+  // },
 };
 </script>
 
