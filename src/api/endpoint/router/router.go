@@ -1,7 +1,7 @@
 package router
 
 import (
-	"AE2TEAM2/src/api/endpoint/controllers"
+	"github.com/NKotani/AE2Team2/src/api/endpoint/controllers"
 
 	"github.com/gin-gonic/gin"
 )

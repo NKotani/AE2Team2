@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"go_test/models"
 	"net/http"
+
+	"github.com/NKotani/AE2Team2/src/api/endpoint/models"
 
 	"github.com/gin-gonic/gin"
 )
