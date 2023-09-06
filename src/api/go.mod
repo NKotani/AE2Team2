@@ -1,4 +1,4 @@
-module github.com/shinjiezumi/vue-go-samples/src/api
+module github.com/NKotani/AE2Team2/src/api
 
 go 1.15
 

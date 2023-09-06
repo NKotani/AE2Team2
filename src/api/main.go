@@ -9,10 +9,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/database"
-	"github.com/shinjiezumi/vue-go-samples/src/api/endpoint/auth"
-	"github.com/shinjiezumi/vue-go-samples/src/api/endpoint/searcher"
-	"github.com/shinjiezumi/vue-go-samples/src/api/endpoint/todo_list"
+	"github.com/NKotani/AE2Team2/src/api/database"
+	"github.com/NKotani/AE2Team2/src/api/endpoint/auth"
+	"github.com/NKotani/AE2Team2/src/api/endpoint/router"
+	"github.com/NKotani/AE2Team2/src/api/endpoint/searcher"
+	"github.com/NKotani/AE2Team2/src/api/endpoint/todo_list"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 	}
 	database.Initialize()
 
-	router := gin.Default()
+	r := gin.Default()
 
 	config := cors.DefaultConfig()
 	config.AllowHeaders = append(config.AllowHeaders, "Authorization")
@@ -32,10 +33,10 @@ func main() {
 	} else {
 		config.AllowOrigins = []string{"https://vgs.shinjiezumi.work"}
 	}
-	router.Use(cors.New(config))
+	r.Use(cors.New(config))
 
 	// Api
-	api := router.Group("/api")
+	api := r.Group("/api")
 	{
 		api.GET("/", func(context *gin.Context) {
 			context.JSON(http.StatusOK, gin.H{
@@ -44,6 +45,7 @@ func main() {
 		})
 		auth.SetupRoute(api)
 		searcher.SetupRoute(api)
+		router.Init(api)
 
 		// 認証必要なエンドポイント
 		api.Use(auth.MiddlewareFunc())
@@ -57,7 +59,7 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-	err := router.Run(":" + port)
+	err := r.Run(":" + port)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

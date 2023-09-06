@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/common"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"

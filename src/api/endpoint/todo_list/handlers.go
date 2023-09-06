@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
-	"github.com/shinjiezumi/vue-go-samples/src/api/endpoint/auth"
-	"github.com/shinjiezumi/vue-go-samples/src/api/usecase/todo_list"
+	"github.com/NKotani/AE2Team2/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/endpoint/auth"
+	"github.com/NKotani/AE2Team2/src/api/usecase/todo_list"
 )
 
 // GetTodoList はTodo一覧を返す
