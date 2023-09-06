@@ -39,5 +39,15 @@ bash scripts/start-front.sh
 
 `http://localhost:8080` 開く
 
+## 終了
+```bash
+docker-compose down
+```
+
+コンテナを0から構築し直したいときは以下のコマンド
+```bash
+docker-compose down --rmi all
+```
+
 ## 参考
 https://github.com/shinjiezumi/vue-go-samples
