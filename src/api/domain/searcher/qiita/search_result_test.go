@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/common"
 )
 
 func TestSearchResult_GetCreatedDate(t *testing.T) {

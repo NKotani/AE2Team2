@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
-	"github.com/shinjiezumi/vue-go-samples/src/api/database"
-	"github.com/shinjiezumi/vue-go-samples/src/api/domain/todo"
+	"github.com/NKotani/AE2Team2/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/database"
+	"github.com/NKotani/AE2Team2/src/api/domain/todo"
 )
 
 type updateTodoUseCase struct{}

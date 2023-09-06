@@ -3,7 +3,7 @@ package qiita
 import (
 	"time"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/common"
 )
 
 // SearchResults 検索結果一覧

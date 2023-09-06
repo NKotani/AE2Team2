@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin/binding"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/usecase/auth"
+	"github.com/NKotani/AE2Team2/src/api/usecase/auth"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/domain/user"
+	"github.com/NKotani/AE2Team2/src/api/domain/user"
 
 	"github.com/gin-gonic/gin"
 )

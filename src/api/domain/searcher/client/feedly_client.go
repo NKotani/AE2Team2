@@ -9,8 +9,8 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
-	"github.com/shinjiezumi/vue-go-samples/src/api/domain/searcher/feedly"
+	"github.com/NKotani/AE2Team2/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/domain/searcher/feedly"
 )
 
 const searchFeedCount = 100

@@ -1,10 +1,10 @@
 package todo_list
 
 import (
-	"github.com/shinjiezumi/vue-go-samples/src/api/common"
-	"github.com/shinjiezumi/vue-go-samples/src/api/database"
-	"github.com/shinjiezumi/vue-go-samples/src/api/domain/todo"
-	"github.com/shinjiezumi/vue-go-samples/src/api/domain/user"
+	"github.com/NKotani/AE2Team2/src/api/common"
+	"github.com/NKotani/AE2Team2/src/api/database"
+	"github.com/NKotani/AE2Team2/src/api/domain/todo"
+	"github.com/NKotani/AE2Team2/src/api/domain/user"
 )
 
 type TodoResponse struct {

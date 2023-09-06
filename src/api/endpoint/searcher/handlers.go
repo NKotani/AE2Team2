@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/shinjiezumi/vue-go-samples/src/api/usecase/searcher"
+	"github.com/NKotani/AE2Team2/src/api/usecase/searcher"
 )
 
 // Search は検索して結果を返します

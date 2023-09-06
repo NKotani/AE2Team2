@@ -6,14 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Init() {
-	r := gin.Default()
-
+func Init(api *gin.RouterGroup) {
 	// テスト
-	r.GET("/test", controllers.Test)
+	api.GET("/test", controllers.Test)
 
 	// 検索
-	r.GET("/search", controllers.GetRecipe)
-
-	r.Run()
+	api.GET("/search", controllers.GetRecipe)
 }
