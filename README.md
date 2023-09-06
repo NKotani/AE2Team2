@@ -12,13 +12,14 @@
   * なるべく同じ担当の人がみた方がわかりやすいかも
 
 ## 使い方
+`docker-compose`のコマンドを使うときはDocker Desktopを立ち上げてから行う
 ```bash
 git clone https://github.com/shinjiezumi/vue-go-samples.git
 cd vue-go-samples
 docker-compose up -d
 ```
 
-以下が毎回必要か不明
+以下2つは最初に立ち上げるときだけだと思われます。
 ```bash
 docker-compose exec api bash
 sql-migrate up # 失敗したらDockerを立ち上げ直すとうまくいくかも
