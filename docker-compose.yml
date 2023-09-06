@@ -31,8 +31,8 @@ services:
     tty: true
   db:
     build: docker/mysql
-    platform: linux/arm64 # M1 Mac
-    # platform: linux/amd64 # M1 Macはarmかamdのどっちかを使うとうまくいく
+    # platform: linux/arm64 # M1 Mac
+    platform: linux/amd64 # M1 Macはarmかamdのどっちかを使うとうまくいく
     ports:
       - 3306:3306
     volumes:
