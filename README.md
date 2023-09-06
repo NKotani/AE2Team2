@@ -49,5 +49,12 @@ docker-compose down
 docker-compose down --rmi all
 ```
 
+## DBのコンテナでエラーが出た場合
+```bash
+ae2team2-db-1     | 2023-09-06T05:38:41.384273Z 0 [ERROR] [FATAL] InnoDB: Table flags are 0 in the data dictionary but the flags in file ./ibdata1 are 0x4000!
+```
+1. `docker/mysql/data`のフォルダを全て消す
+2. `docker-compose up`し直す
+
 ## 参考
 https://github.com/shinjiezumi/vue-go-samples
