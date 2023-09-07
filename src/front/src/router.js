@@ -26,39 +26,6 @@ export default new Router({
       component: Top,
     },
     {
-      path: '/register',
-      component: Register,
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/check']) {
-          next('/todos');
-        } else {
-          next();
-        }
-      },
-    },
-    {
-      path: '/login',
-      component: Login,
-      beforeEnter(to, from, next) {
-        if (store.getters['auth/check']) {
-          next('/todos');
-        } else {
-          next();
-        }
-      },
-    },
-    {
-      path: '/todos',
-      component: Todo,
-      beforeEnter(to, from, next) {
-        if (!store.getters['auth/check']) {
-          next('/login');
-        } else {
-          next();
-        }
-      },
-    },
-    {
       path: '/searcher',
       component: Searcher,
     },
