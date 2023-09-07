@@ -13,8 +13,10 @@ import Top from './views/Top';
 // eslint-disable-next-line import/no-unresolved,import/extensions
 import Todo from './views/Todo';
 import Searcher from './views/Searcher.vue';
+import RecipeSearcher from './views/RecipeSearcher.vue';
 // eslint-disable-next-line import/no-cycle
 import store from './store';
+
 
 Vue.use(Router);
 
@@ -61,6 +63,11 @@ export default new Router({
     {
       path: '/searcher',
       component: Searcher,
+      props: true,
+    },
+    {
+      path: '/RecipeSearcher',
+      component: RecipeSearcher,
     },
     {
       path: '/hello',
