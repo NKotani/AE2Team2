@@ -57,7 +57,7 @@
                       <!--<v-img :src="item.recipe_image" class="ma-3" max-height="100" max-width="150"></v-img> -->
                       <div>
                         <!-- v-text="item.recipe_name"-->
-                        <v-card-title class="text-h5">{{ item.recipe_name }}</v-card-title>
+                        <v-card-title class="text-h5">{{ item.recipe_name }}（{{ String(item.serving_size) }}人前）</v-card-title>
                         <span v-for="food in item.ingredients" :key="food" class="ml-5">
                           <span class="font-weight-bold">
                             {{ food.name }}：
@@ -108,37 +108,18 @@ export default {
     };
   },
   created() {
-    this.searchRecipes();
+    // this.searchRecipes();
+    this.setData();
   },
   methods: {
-    async searchRecipes() {
-      const postData = {
-        conditions: [
-          {
-            id: 1,
-            name: "ウインナー",
-            amount: 5,
-            unit: "本",
-          },
-          {
-            id: 1,
-            name: "キャベツ",
-            amount: 10,
-            unit: "g",
-          },
-        ],
-        quantity: 1,
-      };
+    setData() {
+      const data = this.$store.state.responseData;
+      console.log(data)
+      // 何らかの処理
 
-      try {
-        const response = await axios.post("/search", postData);
-
-        // レスポンスからデータを取得
-        this.requestData = response.data.request_data;
-        this.recipes = response.data.recipes;
-        console.log(this.recipes);
-      } catch (error) {
-        console.error("データの取得中にエラーが発生しました: ", error);
+      if (data) {
+        this.requestData = data.request_data || {};
+        this.recipes = data.recipes || [];
       }
     },
     go_back() {

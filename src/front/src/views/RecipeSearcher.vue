@@ -1,5 +1,6 @@
 <template>
     <v-app>
+        <v-main>
         <v-container>
             <v-row>
                 <v-col>
@@ -41,9 +42,9 @@
                         v-for="(condition, index) in formData.conditions"
                         v-bind:key="condition.conditionId"
                         :index="index"
-                        :ingredient="ingredient"
-                        :amount="amount"
-                        :unit="unit"
+                        :ingredient="condition.ingredient"
+                        :amount="condition.amount"
+                        :unit="condition.unit"
                         @trash="deleteCondition"
                         @inputg="setIngredient"
                         @inputam="setAmount"
@@ -69,6 +70,7 @@
                 </v-form>
             </v-row>
         </v-container>
+        </v-main>
     </v-app>
 </template>
 
@@ -78,77 +80,94 @@ import axios from 'axios';
 
 
 export default {
-  name: 'App',
+    name: 'App',
 
-  components: {
-    SearchCondition
-  },
+    components: {
+        SearchCondition
+    },
 
-  data: () => ({
-    conditionId: 0,
-    maxCount: 1000,
+    data: () => ({
+        conditionId: 0,
+        maxCount: 1000,
 
-    formData:{
-        quantity:'',
-        conditions:[
-            {
-                conditionId:0,
+        formData:{
+            quantity:'',
+            conditions:[
+                {
+                    conditionId:0,
+                    ingredient:'',
+                    amount:'',
+                    unit:''
+                },
+            ]
+        },
+    }),
+
+    methods: {
+        addCondition: function() {
+            if(this.maxCount<=++this.conditionId) this.conditionId = 0;
+            this.formData.conditions.push({
+                conditionId:this.conditionId,
                 ingredient:'',
                 amount:'',
-                unit:''
-            },
-        ]
-    },
-  }),
+                unit:'',
+                priority:'',
+            });
+        },
+        
+        deleteCondition: function(index) {
+            console.log('delete' + index);
+            this.formData.conditions.splice(index, 1);
+        },
 
-  methods: {
+        setIngredient: function(index, value) {
+            console.log('value = '+ value);
+            this.formData.conditions[index].ingredient = value;
+        },
 
-    addCondition: function() {
-        if(this.maxCount<=++this.conditionId) this.conditionId = 0;
-        this.formData.conditions.push({
-            conditionId:this.conditionId,
-            ingredient:'',
-            amount:'',
-            unit:'',
-            priority:'',
-        });
-    },
-    
-    deleteCondition: function(index) {
-        console.log('delete' + index);
-        this.formData.conditions.splice(index, 1);
-    },
+        setAmount: function(index, value) {
+            this.formData.conditions[index].amount = value;
+        },
+        
+        setUnit: function(index, value) {
+            console.log('setUnit');
+            this.formData.conditions[index].unit = value;
+        },
 
-    setIngredient: function(index, value) {
-        console.log('value = '+ value);
-        this.formData.conditions[index].ingredient = value;
-    },
+        sendData: async function(){
+            const payload = {
+                conditions: this.formData.conditions.map(condition => ({
+                    id: condition.conditionId,
+                    name: condition.ingredient,
+                    amount: parseInt(condition.amount, 10),
+                    unit: condition.unit
+                })),
+                quantity: parseInt(this.formData.quantity, 10)
+            };
+            
+            console.log('Sending payload:', payload);
 
-    setAmount: function(index, value) {
-        this.formData.conditions[index].amount = value;
-    },
-    
-    setUnit: function(index, value) {
-        console.log('setUnit');
-        this.formData.conditions[index].unit = value;
-    },
-
-    sendData: async function(){
-        console.log('Request:', this.formData);
-        // Send a POST request
-        await axios.post('endpoint', this.formData)
+            // Send a POST request
+            await axios.post('/search', payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
             .then(response => {
-            // Handle the successful response here
-            console.log('Response:', response.data);
+                // Handle the successful response here
+                console.log('Response:', response.data);
+
+                // Vuexストアにデータを保存
+                this.$store.commit('setResponseData', response.data);
+
+                // ルートを変更
+                this.$router.push('/searcher');
             })
             .catch(error => {
-            // Handle any errors that occurred during the request
-            console.error('Error:', error);
+                // Handle any errors that occurred during the request
+                console.error('Error:', error);
             });
-        // propsとrouterでresponseの宣言必要
-        this.$router.push({path: '/searcher', params:{response:'response.data'}});
+        }
     }
-    
-  }
 };
 </script>
