@@ -10,7 +10,7 @@
               max-height="45"
               max-width="210"
             />
-          </router-link>
+        </router-link>
       </v-app-bar-title>
       <v-spacer />
       <div class="d-flex align-center">
