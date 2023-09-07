@@ -2,6 +2,7 @@
   <v-main>
     <v-app>
       <v-container>
+        <!-- レシピ概要 -->
         <v-row class='my-1'>
           <v-col class='d-flex align-left'>
             <v-btn elevation='2' @click='go_back()'>
@@ -52,24 +53,22 @@
           </v-col>
         </v-row>
 
+        <!-- 材料リスト -->
         <v-row class=''>
           <v-col>
             <div class="text-h6">材料({{ this.recipes.serving_size }}人分)</div>
             <v-card tile class='mx-auto' outlined>
               <v-list>
                 <v-list-item-group v-model="selectedItems" color="gray" multiple>
+                  <!-- ↓ここに材料のデータを入れる -->
                   <v-list-item v-for="(item, i) in recipes.ingredients" :key="i">
                     <v-list-item-content>
                       <v-list-item-title v-text="item.name"></v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-content>
-                      <v-list-item-title
-                        v-if="item.quantity == '0'"
-                        v-text="item.unit">
+                      <v-list-item-title v-if="item.quantity == '0'" v-text="item.unit">
                       </v-list-item-title>
-                      <v-list-item-title
-                        v-else
-                        v-text="item.quantity + item.unit">
+                      <v-list-item-title v-else v-text="item.quantity + item.unit">
                       </v-list-item-title>
                     </v-list-item-content>
                     <v-spacer></v-spacer>
@@ -84,12 +83,14 @@
           </v-col>
         </v-row>
 
+        <!-- 料理手順 -->
         <v-row class=''>
           <v-col>
             <div class="text-h6">作り方</div>
             <v-card tile class='mx-auto' outlined>
               <v-list disabled>
                 <v-list-item-group v-model="selectedItem" color="green">
+                  <!-- ↓ここにレシピの手順のデータを入れる -->
                   <v-list-item v-for="(item, i) in recipes.recipe" :key="i">
                     <v-list-item-icon>
                       <v-chip color="orange" text-color="white" label>
