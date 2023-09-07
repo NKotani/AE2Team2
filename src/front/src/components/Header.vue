@@ -1,45 +1,47 @@
 <template>
   <div>
-    <v-app-bar app color="primary" dark>
-      <v-app-bar-nav-icon @click="drawer = true" />
+    <!-- <v-app-bar app color="primaryOrange"> -->
+      <v-app-bar app color="white">
+      <v-app-bar-title>
+        <router-link to="/">
+            <v-img
+              :src="require('../assets/logo.svg')"
+              class="mr-auto"
+              max-height="45"
+              max-width="210"
+            />
+          </router-link>
+      </v-app-bar-title>
+      <v-spacer />
       <div class="d-flex align-center">
-        <v-btn to="/" text>
-          Vue Go Samples
+        <v-btn to="/wishlist">
+          <v-img
+            :src="require('../assets/shopping.svg')"
+            contain
+            max-height="30"
+            max-width="30"
+          />
+          買い物リスト
         </v-btn>
       </div>
-      <v-spacer />
+      <div class="d-flex align-center">
+        <!-- logout機能ないのでTopに飛ぶ -->
+        <v-btn to="/" text>
+          <v-img
+            :src="require('../assets/logout.svg')"
+            contain
+            max-height="30"
+            max-width="30"
+          />
+          ログアウト
+        </v-btn>
+      </div>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-list v-if="!this.isLogin" dense>
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn to="/register" text>
-              会員登録
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn to="/login" text>
-              ログイン
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-      <v-list v-else dense>
-        <v-list-item>
-          <v-list-item-content>
-            <v-btn text @click="logout">
-              ログアウト
-            </v-btn>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Header',
   data() {
@@ -47,15 +49,15 @@ export default {
       drawer: false,
     };
   },
-  computed: {
-    isLogin() {
-      return this.$store.getters['auth/check'];
-    },
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('auth/logout');
-    },
-  },
+  // computed: {
+  //   isLogin() {
+  //     return this.$store.getters['auth/check'];
+  //   },
+  // },
+  // methods: {
+  //   logout() {
+  //     this.$store.dispatch('auth/logout');
+  //   },
+  // },
 };
 </script>
