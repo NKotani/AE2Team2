@@ -32,7 +32,7 @@ const globalMixIn = {
 Vue.mixin(globalMixIn);
 
 const createApp = async () => {
-  await store.dispatch('auth/currentUser');
+  // await store.dispatch('auth/currentUser');
 
   new Vue({
     vuetify,
