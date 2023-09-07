@@ -18,4 +18,12 @@ export default new Vuex.Store({
     searcher,
     loading,
   },
+  state: {
+    responseData: null // or some initial value
+  },
+  mutations: {
+      setResponseData(state, data) {
+      state.responseData = data
+      }
+  }
 });
