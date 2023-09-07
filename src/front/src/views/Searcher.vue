@@ -14,17 +14,16 @@
           <v-card tile class="mx-auto" color="#E0E0E0" outlined>
             <div class="ma-2">
               <v-row class="mx-1">
-                <v-card-title class="justify-start text-h6">検索した条件</v-card-title
-                ></v-row
-              >
-              <v-row
-                class="mx-5 my-0"
-                v-for="(item, i) in query"
-                :key="i"
+                <v-card-title class="justify-start text-h6">検索した条件</v-card-title>
+              </v-row>
+              <v-row 
+                class="mx-5 my-0" 
+                v-for="(item, i) in requestData.conditions" 
+                :key="i" 
                 cols="12"
               >
                 <span>
-                  食材:{{ item.ingredient }}, 量:{{ item.amout }}{{ item.unit }}
+                  食材：{{ item.name }}, 量：{{ item.amount }}{{ item.unit }}
                 </span>
               </v-row>
               <!-- <v-list-item v-for="n in 3" :key="n"
@@ -35,51 +34,59 @@
         >
       </v-row>
 
+      
       <v-row class="my-1">
         <v-col>
+          <h2 v-if="recipes !== null">検索結果： {{ recipes.length }}件</h2>
+          <h2 v-else>検索結果： 0件</h2>
           <v-card tile class="mx-auto" color="#FFECB3" outlined>
             <v-row justify="end" class="mx-10 mt-1">
-              <v-col cols="12" sm="3"><v-select
-                  :items="items"
-                  label="並べ替え"
-                  dense
-                ></v-select></v-col
-            ></v-row>
+              <v-col cols="12" sm="3">
+                <!--<v-select :items="items" label="並べ替え" dense></v-select>-->
+              </v-col>
+            </v-row>
 
             <v-container>
-              <v-row dense>
+              <v-row v-if="recipes !== null" dense>
                 <v-col v-for="(item, i) in recipes" :key="i" cols="12">
                   <v-card color="" class="mx-10 my-2" @click="to_recipe()">
                     <div class="d-flex">
                       <v-avatar class="ma-3" size="125" tile>
-                        <v-img :src="item.foodImageUrl"></v-img>
+                        <v-img :src="item.recipe_image_url"></v-img>
                       </v-avatar>
-<!-- <v-img :src="item.recipe_image" class="ma-3" max-height="100" max-width="150"></v-img> -->
+                      <!--<v-img :src="item.recipe_image" class="ma-3" max-height="100" max-width="150"></v-img> -->
                       <div>
-                        <v-card-title
-                          class="text-h5"
-                          v-text="item.recipeTitle"
-                        ></v-card-title>
-
-                        <span
-                          v-for="food in item.recipeMaterial"
-                          :key="food"
-                          class="ml-5"
-                        >
-                          <span
-                            v-if="is_searched(food)"
-                            class="font-weight-bold"
-                            >{{ food }}</span
-                          >
-                          <span v-else>{{ food }}</span>
+                        <!-- v-text="item.recipe_name"-->
+                        <v-card-title class="text-h5">{{ item.recipe_name }}（{{ String(item.serving_size) }}人前）</v-card-title>
+                        <span v-for="food in item.ingredients" :key="food" class="ml-5">
+                          <span class="font-weight-bold">
+                            {{ food.name }}：
+                          </span>
+                          <span v-if="food.amount !== 0">
+                            {{ food.amount }}{{ food.unit }}
+                          </span>
+                          <span v-else>
+                            {{ food.unit }}
+                          </span>
+                          <br>
                         </span>
                       </div>
                     </div>
                   </v-card>
                 </v-col>
               </v-row>
-            </v-container></v-card
-          >
+              <v-row v-else dense>
+                
+                <v-col cols="12">
+                  <v-card color="" class="mx-10 my-2">
+                    <div class="d-flex">
+                      <v-card-title class="text-h5">レシピが見つかりませんでした</v-card-title>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -88,60 +95,32 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  data: () => ({
-    items: ['人気順', '追加が必要な材料が少ない順'],
-    query: [
-      {
-        ingredient: 'じゃがいも',
-        amout: 100,
-        unit: 'g',
+  data() {
+    return {
+      requestData: {
+        conditions: [],
+        quantity: 1,
       },
-      {
-        ingredient: 'たろいも',
-        amout: 200,
-        unit: 'g',
-      },
-      {
-        ingredient: 'さといも',
-        amout: 300,
-        unit: 'g',
-      },
-    ],
-    recipes: [
-      {
-        foodImageUrl: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
-        recipeTitle: 'おにぎり',
-        recipeMaterial: ['米', 'おかか', '塩'],
-      },
-      {
-        foodImageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-        recipeTitle: 'パスタ',
-        recipeMaterial: ['めん', 'ソース'],
-      },
-      {
-        foodImageUrl:
-          'https://images.unsplash.com/photo-1598439210625-5067c578f3f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80',
-        recipeTitle: 'うどん',
-        recipeMaterial: ['めん', 'じゃがいも'],
-      },
-      {
-        foodImageUrl: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-        recipeTitle: 'そば',
-        recipeMaterial: ['めん', 'つゆ', '天ぷら'],
-      },
-    ],
-  }),
-  computed: {
+      recipes: [],
+    };
+  },
+  created() {
+    // this.searchRecipes();
+    this.setData();
   },
   methods: {
-    is_searched(word) {
-      for (let i = 0; i < this.query.length; i += 1) {
-        if (this.query[i].ingredient.includes(word)) {
-          return true;
-        }
+    setData() {
+      const data = this.$store.state.responseData;
+      console.log(data)
+      // 何らかの処理
+
+      if (data) {
+        this.requestData = data.request_data || {};
+        this.recipes = data.recipes || [];
       }
-      return false;
     },
     go_back() {
       this.$router.push('/');
