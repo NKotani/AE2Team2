@@ -14,13 +14,25 @@
       </v-app-bar-title>
       <v-spacer />
       <div class="d-flex align-center">
-        <v-btn to="/wishlist" text>
+        <v-btn to="/wishlist">
+          <v-img
+            :src="require('../assets/shopping.svg')"
+            contain
+            max-height="30"
+            max-width="30"
+          />
           買い物リスト
         </v-btn>
       </div>
       <div class="d-flex align-center">
         <!-- logout機能ないのでTopに飛ぶ -->
         <v-btn to="/" text>
+          <v-img
+            :src="require('../assets/logout.svg')"
+            contain
+            max-height="30"
+            max-width="30"
+          />
           ログアウト
         </v-btn>
       </div>
@@ -29,6 +41,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Header',
   data() {
