@@ -35,14 +35,14 @@
                 {{ this.recipes.recipeIndication }}
                 <v-row class='my-2'>
                   <h5 class="text-decoration-underline">
-                    <v-icon class="mr-1">mdi-clock</v-icon>
+                    <v-icon class="mr-1">mdi-cash-multiple</v-icon>
                     コスト
                   </h5>
                 </v-row>
                 {{ this.recipes.recipeCost }}
                 <v-row class='my-2'>
                   <h5 class="text-decoration-underline">
-                    <v-icon class="mr-1">mdi-clock</v-icon>
+                    <v-icon class="mr-1">mdi-account</v-icon>
                     量
                   </h5>
                 </v-row>
@@ -63,7 +63,14 @@
                       <v-list-item-title v-text="item.name"></v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-content>
-                      <v-list-item-title v-text="item.quantity+item.unit"></v-list-item-title>
+                      <v-list-item-title
+                        v-if="item.quantity == '0'"
+                        v-text="item.unit">
+                      </v-list-item-title>
+                      <v-list-item-title
+                        v-else
+                        v-text="item.quantity + item.unit">
+                      </v-list-item-title>
                     </v-list-item-content>
                     <v-spacer></v-spacer>
                     <v-list-item-content>
@@ -111,6 +118,7 @@ export default {
   data: () => ({
     recipes:
     {
+      // ここからダミーデータ
       recipeTitle: '子供が喜ぶウインナーとジャガイモのチーズ焼き',
       recipeUrl: 'https://recipe.rakuten.co.jp/recipe/1900012525/',
       foodImageUrl: 'https://image.space.rakuten.co.jp/d/strg/ctrl/3/79b725a01f97749ed1b1fe6915b1aa673beb2e61.18.2.3.2.jpg',
@@ -151,27 +159,21 @@ export default {
       ],
       recipe: ['ジャガイモは5mm角の3cmぐらいに切り、玉ねぎはうすぎり、ウインナーはジャガイモと大体同じ大きさに切る。', 'じゃがいもをレンジで柔らかくする。', 'ウインナーと玉ねぎを最初にフライパンに入れ中火で炒め、その後ジャガイモをいれて水分をとばし、塩こしょうをする。', '耐熱皿かアルミホイルにのせて、その上にチーズをのせる。', 'トースター、グリルなどで５分ほど焼き、チーズがとけて焼き目がついたらできあがり♡'],
     },
-    items: [
-      { text: 'Real-Time', icon: 'mdi-clock' },
-      { text: 'Audience', icon: 'mdi-account' },
-      { text: 'Conversions', icon: 'mdi-flag' },
-    ],
     selectedItems: [],
-    isListDisabled: true, // v-listを無効にするかどうかを管理
   }),
   created() {
     this.set_selectedItems();
   },
   methods: {
     go_back() {
-      //   this.$router.push('/searcher');
+      this.$router.push('/searcher');
     },
     to_list() {
-      this.$router.push('/');
+      this.$router.push('/wishlist');
     },
     set_selectedItems() {
-      for (let i = 1; i <= 8; i += 2) {
-        this.selectedItems.push(i); // 8は材料の数に変更したい
+      for (let i = 1; i <= 11; i += 2) {
+        this.selectedItems.push(i); // 11は材料の数に変更したい
       }
     },
   },
