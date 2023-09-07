@@ -13,7 +13,9 @@
         <v-row justify='center'>
           <v-col class='py-0'>
             <v-toolbar flat color='#E0E0E0' max-width='100%'>
-              <v-toolbar-title class='font-weight-bold'>料理名</v-toolbar-title>
+              <v-toolbar-title class='font-weight-bold'>
+                {{ this.recipes.recipeTitle }}
+              </v-toolbar-title>
             </v-toolbar>
           </v-col>
         </v-row>
@@ -53,21 +55,24 @@
         <v-row class=''>
           <v-col>
             <div class="text-h6">材料({{ this.recipes.serving_size }}人分)</div>
-            <v-card tile class='mx-auto' color='#E0E0E0' outlined>
-              <v-list-item-group v-model="selectedItem" color="primary">
-                <v-list-item v-for="(item, i) in items" :key="i">
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.text"></v-list-item-title>
-                  </v-list-item-content>
-                  <v-list-item-content>
-                    aaa
-                  </v-list-item-content>
-                  <v-spacer></v-spacer>
-                  <v-list-item-content>
-                    <v-btn outlined rounded>買い物リストに追加</v-btn>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
+            <v-card tile class='mx-auto' outlined>
+              <v-list>
+                <v-list-item-group v-model="selectedItems" color="gray" multiple>
+                  <v-list-item v-for="(item, i) in recipes.ingredients" :key="i">
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.name"></v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.quantity+item.unit"></v-list-item-title>
+                    </v-list-item-content>
+                    <v-spacer></v-spacer>
+                    <v-list-item-content>
+                      <v-btn outlined rounded @click="to_list()">
+                        買い物リストに追加</v-btn>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
             </v-card>
           </v-col>
         </v-row>
@@ -75,21 +80,23 @@
         <v-row class=''>
           <v-col>
             <div class="text-h6">作り方</div>
-            <v-card tile class='mx-auto' color='#E0E0E0' outlined>
-              <v-list-item-group v-model="selectedItem" color="primary">
-                <v-list-item v-for="(item, i) in items" :key="i">
-                  <v-list-item-content>
-                    <v-list-item-title>{{i+1}}</v-list-item-title>
-                  </v-list-item-content>
-                  <v-list-item-content>
-                    aaa
-                  </v-list-item-content>
-                  <v-spacer></v-spacer>
-                  <v-list-item-content>
-                    <v-btn outlined rounded>買い物リストに追加</v-btn>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
+            <v-card tile class='mx-auto' outlined>
+              <v-list disabled>
+                <v-list-item-group v-model="selectedItem" color="green">
+                  <v-list-item v-for="(item, i) in recipes.recipe" :key="i">
+                    <v-list-item-icon>
+                      <v-chip color="orange" text-color="white" label>
+                        {{ i + 1 }}
+                      </v-chip></v-list-item-icon>
+                    <v-list-item-content>
+                      <v-list-item-title class="wrap-text">
+                        <span>{{ item }}</span>
+                      </v-list-item-title>
+                    </v-list-item-content>
+
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
             </v-card>
           </v-col>
         </v-row>
@@ -142,19 +149,38 @@ export default {
           unit: 'ひとつまみ',
         },
       ],
-      recipe: "['ジャガイモは5mm角の3cmぐらいに切り、玉ねぎはうすぎり、ウインナーはジャガイモと大体同じ大きさに切る。', 'じゃがいもをレンジで柔らかくする。', 'ウインナーと玉ねぎを最初にフライパンに入れ中火で炒め、その後ジャガイモをいれて水分をとばし、塩こしょうをする。', '耐熱皿かアルミホイルにのせて、その上にチーズをのせる。', 'トースター、グリルなどで５分ほど焼き、チーズがとけて焼き目がついたらできあがり♡']",
+      recipe: ['ジャガイモは5mm角の3cmぐらいに切り、玉ねぎはうすぎり、ウインナーはジャガイモと大体同じ大きさに切る。', 'じゃがいもをレンジで柔らかくする。', 'ウインナーと玉ねぎを最初にフライパンに入れ中火で炒め、その後ジャガイモをいれて水分をとばし、塩こしょうをする。', '耐熱皿かアルミホイルにのせて、その上にチーズをのせる。', 'トースター、グリルなどで５分ほど焼き、チーズがとけて焼き目がついたらできあがり♡'],
     },
     items: [
       { text: 'Real-Time', icon: 'mdi-clock' },
       { text: 'Audience', icon: 'mdi-account' },
       { text: 'Conversions', icon: 'mdi-flag' },
     ],
+    selectedItems: [],
+    isListDisabled: true, // v-listを無効にするかどうかを管理
   }),
-  computed: {},
+  created() {
+    this.set_selectedItems();
+  },
   methods: {
     go_back() {
       //   this.$router.push('/searcher');
     },
+    to_list() {
+      this.$router.push('/');
+    },
+    set_selectedItems() {
+      for (let i = 1; i <= 8; i += 2) {
+        this.selectedItems.push(i); // 8は材料の数に変更したい
+      }
+    },
   },
 };
 </script>
+
+<style>
+.wrap-text {
+  word-break: break-all;
+  white-space: normal;
+}
+</style>
