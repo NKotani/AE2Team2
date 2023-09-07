@@ -8,11 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetRecipe(c *gin.Context) {
-	id := c.Param("id")
-	recipes, err := models.FindRecipe(id)
+func PostRecipe(c *gin.Context) {
+	var requestData *models.RequestData
+
+	if err := c.ShouldBindJSON(&requestData); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	recipes, err := models.FindRecipe(requestData)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Recipe not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "レシピが見つかりません"})
 		return
 	}
 
