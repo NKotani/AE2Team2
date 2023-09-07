@@ -1,9 +1,10 @@
 <template>
   <v-app>
+    <v-main>
     <v-container>
       <v-row class="my-1">
         <v-col class="d-flex align-left">
-          <v-btn elevation="2">
+          <v-btn elevation="2" @click="go_back()">
             <v-icon right dark class="mx-0"> mdi-menu-left-outline </v-icon
             >検索画面に戻る</v-btn
           ></v-col
@@ -40,7 +41,7 @@
             <v-row justify="end" class="mx-10 mt-1">
               <v-col cols="12" sm="3"><v-select
                   :items="items"
-                  label="並び替え"
+                  label="並べ替え"
                   dense
                 ></v-select></v-col
             ></v-row>
@@ -48,7 +49,7 @@
             <v-container>
               <v-row dense>
                 <v-col v-for="(item, i) in recipes" :key="i" cols="12">
-                  <v-card color="" class="mx-10 my-2">
+                  <v-card color="" class="mx-10 my-2" @click="to_recipe()">
                     <div class="d-flex">
                       <v-avatar class="ma-3" size="125" tile>
                         <v-img :src="item.foodImageUrl"></v-img>
@@ -82,11 +83,11 @@
         </v-col>
       </v-row>
     </v-container>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-// import { defineComponent } from '@vue/composition-api'
 export default {
   data: () => ({
     items: ['人気順', '追加が必要な材料が少ない順'],
@@ -132,11 +133,6 @@ export default {
     ],
   }),
   computed: {
-    // is_searched(word) {
-    //   console.log(word);
-    //   console.log(this.query.ingredient);
-    //   return true;
-    // },
   },
   methods: {
     is_searched(word) {
@@ -146,6 +142,12 @@ export default {
         }
       }
       return false;
+    },
+    go_back() {
+      this.$router.push('/');
+    },
+    to_recipe() {
+      this.$router.push('/');
     },
   },
 };
