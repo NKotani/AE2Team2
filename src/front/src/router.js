@@ -15,6 +15,7 @@ import Todo from './views/Todo';
 import Searcher from './views/Searcher.vue';
 // eslint-disable-next-line import/no-cycle
 import store from './store';
+import Wishlist from './views/Wishlist.vue';
 
 Vue.use(Router);
 
@@ -61,6 +62,10 @@ export default new Router({
     {
       path: '/searcher',
       component: Searcher,
+    },
+    {
+      path: '/wishlist',
+      component: Wishlist,
     },
     {
       path: '/hello',
