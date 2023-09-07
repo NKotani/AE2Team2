@@ -7,6 +7,7 @@ import store from './store';
 import { getToken } from './util';
 
 Vue.config.productionTip = false;
+Vue.prototype.$axios = axios;
 
 axios.defaults.baseURL = `${process.env.VUE_APP_API_BASE_URL}/api`;
 axios.interceptors.request.use((config) => {
@@ -31,7 +32,7 @@ const globalMixIn = {
 Vue.mixin(globalMixIn);
 
 const createApp = async () => {
-  await store.dispatch('auth/currentUser');
+  // await store.dispatch('auth/currentUser');
 
   new Vue({
     vuetify,

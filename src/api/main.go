@@ -10,10 +10,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/NKotani/AE2Team2/src/api/database"
-	"github.com/NKotani/AE2Team2/src/api/endpoint/auth"
 	"github.com/NKotani/AE2Team2/src/api/endpoint/router"
-	"github.com/NKotani/AE2Team2/src/api/endpoint/searcher"
-	"github.com/NKotani/AE2Team2/src/api/endpoint/todo_list"
 )
 
 func main() {
@@ -43,16 +40,16 @@ func main() {
 				"message": "Vue Go Samples",
 			})
 		})
-		auth.SetupRoute(api)
-		searcher.SetupRoute(api)
+		// auth.SetupRoute(api)
+		// searcher.SetupRoute(api)
 		router.Init(api)
 
 		// 認証必要なエンドポイント
-		api.Use(auth.MiddlewareFunc())
-		{
-			auth.SetupAuthenticatedRoute(api)
-			todo_list.SetupRoute(api)
-		}
+		// api.Use(auth.MiddlewareFunc())
+		// {
+		// 	auth.SetupAuthenticatedRoute(api)
+		// 	todo_list.SetupRoute(api)
+		// }
 	}
 
 	port := os.Getenv("PORT")
