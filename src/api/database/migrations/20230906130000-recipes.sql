@@ -38,7 +38,7 @@ INSERT INTO recipes (
         "https://image.space.rakuten.co.jp/d/strg/ctrl/3/ce13e10d439507c34d8aa7e40a8cca52e2d8e611.23.2.3.2.jpg", "300円前後", 
         "約10分", "10-66-50", 
         "ソーセージ・ウインナー", "2", 
-        '[{"name": "ウインナー", "quantity": "4", "unit": "本"}, {"name": "キャベツ", "quantity": "2", "unit": "g"}, {"name": "にんにく", "quantity": "1", "unit": "片"}, {"name": "バター", "quantity": "1", "unit": "g"}, {"name": "塩こしょう", "quantity": "0", "unit": "少々"}]', '["ウインナーは斜め切りに、キャベツは一口大に切る。にんにくはみじん切りにする。", "熱したフライパンにサラダ油をひき、ウインナーとキャベツ、にんにくを加え炒める。火が通ったらバターを落とし、塩こしょうを振ってざっくり炒めてできあがり。"]'
+        '[{"name": "ウインナー", "quantity": "4", "unit": "本"}, {"name": "キャベツ", "quantity": "250", "unit": "g"}, {"name": "にんにく", "quantity": "1", "unit": "片"}, {"name": "バター", "quantity": "10", "unit": "g"}, {"name": "塩こしょう", "quantity": "0", "unit": "少々"}]', '["ウインナーは斜め切りに、キャベツは一口大に切る。にんにくはみじん切りにする。", "熱したフライパンにサラダ油をひき、ウインナーとキャベツ、にんにくを加え炒める。火が通ったらバターを落とし、塩こしょうを振ってざっくり炒めてできあがり。"]'
     );
 INSERT INTO recipes (
         recipeRank, recipeTitle, recipeUrl, foodImageUrl, 

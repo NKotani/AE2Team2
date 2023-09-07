@@ -4,9 +4,10 @@ import Router from 'vue-router';
 import Hello from './views/Hello';
 // eslint-disable-next-line import/no-unresolved,import/extensions
 import NotFound from './views/404';
-// eslint-disable-next-line import/no-unresolved,import/extensions
-import Top from './views/Top';
-import Searcher from './views/Searcher.vue';
+
+import Searcher from './views/Searcher';
+
+import RecipeSearcher from './views/RecipeSearcher';
 
 Vue.use(Router);
 
@@ -15,11 +16,16 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Top,
+      component: RecipeSearcher,
     },
     {
       path: '/searcher',
       component: Searcher,
+      props: true,
+    },
+    {
+      path: '/RecipeSearcher',
+      component: RecipeSearcher,
     },
     {
       path: '/hello',
