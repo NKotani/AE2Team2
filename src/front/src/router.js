@@ -6,10 +6,12 @@ import Hello from './views/Hello';
 import NotFound from './views/404';
 
 import Wishlist from './views/Wishlist.vue';
+import Recipe from './views/Recipe.vue';
 
 import Searcher from './views/Searcher';
 
 import RecipeSearcher from './views/RecipeSearcher';
+
 
 Vue.use(Router);
 
@@ -19,6 +21,10 @@ export default new Router({
     {
       path: '/',
       component: RecipeSearcher,
+    },
+    {
+      path: '/recipe',
+      component: Recipe,
     },
     {
       path: '/searcher',
