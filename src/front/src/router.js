@@ -5,6 +5,7 @@ import Hello from './views/Hello';
 // eslint-disable-next-line import/no-unresolved,import/extensions
 import NotFound from './views/404';
 
+import Wishlist from './views/Wishlist.vue';
 import Recipe from './views/Recipe.vue';
 
 import Searcher from './views/Searcher';
@@ -33,6 +34,10 @@ export default new Router({
     {
       path: '/RecipeSearcher',
       component: RecipeSearcher,
+    },
+    {
+      path: '/wishlist',
+      component: Wishlist,
     },
     {
       path: '/hello',
