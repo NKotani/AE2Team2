@@ -218,11 +218,11 @@ export default {
       try {
         // POSTリクエストを送信
         const response = await this.$axios.post('/wishlist', payload);
-        // レスポンスメッセージをポップアウトとして表示
-        alert(response.data.message);
+        
         // アイテムが追加されたとしてマーク
         this.addedItems_wishlist.push(ingredient.name);
       } catch (error) {
+        alert(response.data.message);
         console.error("An error occurred:", error);
       }
       // this.$router.push('/wishlist');

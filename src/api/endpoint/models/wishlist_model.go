@@ -82,7 +82,7 @@ func AddWishlist(jsonData *WishlistJsonData) (string, error) {
 		if err := database.Conn.Table("wishlist").Create(&newItem).Error; err != nil {
 			return "", err // レコード作成に失敗した場合はエラーを返す
 		}
-		return "新しいアイテムがWishlistに追加されました", nil
+		return "買い物リストに追加されました", nil
 	} else {
 		// その他のエラー処理
 		// それ以外のエラーが発生した場合
