@@ -19,11 +19,15 @@ export default new Vuex.Store({
     loading,
   },
   state: {
-    responseData: null // or some initial value
+    responseData: null, // or some initial value
+    fromSearchPage: false
   },
   mutations: {
-      setResponseData(state, data) {
-      state.responseData = data
-      }
+    setResponseData(state, data) {
+      state.responseData = data;
+    },
+    setFromSearchPage(state, value) {
+      state.fromSearchPage = value;
+    }
   }
 });
