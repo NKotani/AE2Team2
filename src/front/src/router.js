@@ -5,8 +5,9 @@ import Hello from './views/Hello';
 // eslint-disable-next-line import/no-unresolved,import/extensions
 import NotFound from './views/404';
 
-import Wishlist from './views/Wishlist.vue';
-import Recipe from './views/Recipe.vue';
+import Wishlist from './views/Wishlist';
+
+import Recipe from './views/Recipe';
 
 import Searcher from './views/Searcher';
 

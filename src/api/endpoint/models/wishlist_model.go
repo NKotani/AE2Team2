@@ -7,12 +7,12 @@ import (
 	"github.com/NKotani/AE2Team2/src/api/database"
 )
 
-type WishlistFormData struct {
-	Name        string `form:"name"`
-	Amount      int    `form:"amount"`
-	Unit        string `form:"unit"`
-	RecipeTitle string `form:"recipeTitle"`
-	RecipeUrl   string `form:"recipeUrl"`
+type WishlistJsonData struct {
+	Name        string `json:"name"`
+	Amount      int    `json:"amount"`
+	Unit        string `json:"unit"`
+	RecipeTitle string `json:"recipeTitle"`
+	RecipeId    int    `json:"recipeId"`
 }
 
 type WishlistItem struct {
@@ -21,7 +21,7 @@ type WishlistItem struct {
 	Amount      int       `json:"amount" gorm:"column:amount"`
 	Unit        string    `json:"unit" gorm:"column:unit"`
 	RecipeTitle string    `json:"recipeTitle" gorm:"column:recipeTitle"`
-	RecipeUrl   string    `json:"recipeUrl" gorm:"column:recipeUrl"`
+	RecipeId    int       `json:"recipeId" gorm:"column:recipeId"`
 	CreatedAt   time.Time `json:"createdAt" gorm:"column:created_at"`
 	UpdatedAt   time.Time `json:"updatedAt" gorm:"column:updated_at"`
 }
@@ -48,7 +48,7 @@ func GetWishlist() (*WishlistResponseData, error) {
 	return &response, nil
 }
 
-func AddWishlist(formData *WishlistFormData) (string, error) {
+func AddWishlist(jsonData *WishlistJsonData) (string, error) {
 	// -----------------------------------------------------------------------------------------------------
 	// DB操作
 	// -----------------------------------------------------------------------------------------------------
@@ -57,8 +57,8 @@ func AddWishlist(formData *WishlistFormData) (string, error) {
 
 	// すべてのフィールドで一致するものを探します。
 	err := database.Conn.Table("wishlist").
-		Where("name = ? AND amount = ? AND unit = ? AND recipeTitle = ? AND recipeUrl = ?",
-			formData.Name, formData.Amount, formData.Unit, formData.RecipeTitle, formData.RecipeUrl).
+		Where("name = ? AND amount = ? AND unit = ? AND recipeTitle = ? AND recipeId = ?",
+			jsonData.Name, jsonData.Amount, jsonData.Unit, jsonData.RecipeTitle, jsonData.RecipeId).
 		First(&existingItem).Error
 
 	// レコードが既に存在する場合
@@ -72,11 +72,11 @@ func AddWishlist(formData *WishlistFormData) (string, error) {
 		fmt.Println("Error2: record not found") // ログ出力
 
 		newItem := WishlistItem{
-			Name:        formData.Name,
-			Amount:      formData.Amount,
-			Unit:        formData.Unit,
-			RecipeTitle: formData.RecipeTitle,
-			RecipeUrl:   formData.RecipeUrl,
+			Name:        jsonData.Name,
+			Amount:      jsonData.Amount,
+			Unit:        jsonData.Unit,
+			RecipeTitle: jsonData.RecipeTitle,
+			RecipeId:    jsonData.RecipeId,
 		}
 
 		if err := database.Conn.Table("wishlist").Create(&newItem).Error; err != nil {
@@ -89,24 +89,4 @@ func AddWishlist(formData *WishlistFormData) (string, error) {
 		fmt.Println("Error3:", err)
 		return "", err
 	}
-
-	// // それ以外のエラーが発生した場合
-	// if err != nil && err != gorm.ErrRecordNotFound {
-	// 	fmt.Println("Error2:", err) // この行を追加
-	// 	return "", err
-	// }
-
-	// newItem := WishlistItem{
-	// 	Name:        formData.Name,
-	// 	Amount:      formData.Amount,
-	// 	Unit:        formData.Unit,
-	// 	RecipeTitle: formData.RecipeTitle,
-	// 	RecipeUrl:   formData.RecipeUrl,
-	// }
-
-	// if err := database.Conn.Table("wishlist").Create(&newItem).Error; err != nil {
-	// 	return "", err // レコード作成に失敗した場合はエラーを返す
-	// }
-
-	// return "新しいアイテムがWishlistに追加されました", nil
 }

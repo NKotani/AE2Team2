@@ -116,12 +116,12 @@ export default {
         },
         
         deleteCondition: function(index) {
-            console.log('delete' + index);
+            // console.log('delete' + index);
             this.formData.conditions.splice(index, 1);
         },
 
         setIngredient: function(index, value) {
-            console.log('value = '+ value);
+            // console.log('value = '+ value);
             this.formData.conditions[index].ingredient = value;
         },
 
@@ -130,7 +130,7 @@ export default {
         },
         
         setUnit: function(index, value) {
-            console.log('setUnit');
+            // console.log('setUnit');
             this.formData.conditions[index].unit = value;
         },
 
@@ -145,7 +145,6 @@ export default {
                 quantity: parseInt(this.formData.quantity, 10)
             };
             
-            console.log('Sending payload:', payload);
 
             // Send a POST request
             await axios.post('/search', payload, {
@@ -154,9 +153,6 @@ export default {
                 },
             })
             .then(response => {
-                // Handle the successful response here
-                console.log('Response:', response.data);
-
                 // Vuexストアにデータを保存
                 this.$store.commit('setResponseData', response.data);
 
@@ -164,7 +160,6 @@ export default {
                 this.$router.push('/searcher');
             })
             .catch(error => {
-                // Handle any errors that occurred during the request
                 console.error('Error:', error);
             });
         }

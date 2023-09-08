@@ -30,7 +30,7 @@
                             v-model="unit"
                             @change="$emit('inputuni', index, unit)" 
                             label="単位"
-                            :items="['個', 'mg', 'g', 'mL', 'L']"
+                            :items="['個', '本', '枚', '匹', '尾', '切れ', 'mg', 'g', 'mL', 'L']"
                         ></v-select>
                     </v-col>
                     <v-col cols = "2" align="center">
