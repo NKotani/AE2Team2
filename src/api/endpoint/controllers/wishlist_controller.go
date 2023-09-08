@@ -20,19 +20,17 @@ func GetWishlist(c *gin.Context) {
 }
 
 func PostWishlist(c *gin.Context) {
-	var formData *models.WishlistFormData
+	var jsonData *models.WishlistJsonData
 
-	// 受信した form-data を構造体にバインド
-	if err := c.ShouldBind(&formData); err != nil {
-		// fmt.Println("Error:", err) // この行を追加
-		c.JSON(http.StatusBadRequest, gin.H{"error": "不正なフォームです"})
+	// 受信した JSON を構造体にバインド
+	if err := c.ShouldBindJSON(&jsonData); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "不正なJSONデータです"})
 		return
 	}
 
 	// formData で AddWishlist を呼び出す
-	message, err := models.AddWishlist(formData)
+	message, err := models.AddWishlist(jsonData)
 	if err != nil {
-		// fmt.Println("Error:", err) // この行を追加
 		c.JSON(http.StatusNotFound, gin.H{"error": "レシピが見つかりません"})
 		return
 	}
