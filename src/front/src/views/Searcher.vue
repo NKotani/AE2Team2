@@ -49,7 +49,7 @@
             <v-container>
               <v-row v-if="recipes !== null" dense>
                 <v-col v-for="(item, i) in recipes" :key="i" cols="12">
-                  <v-card color="" class="mx-10 my-2" @click="to_recipe()">
+                  <v-card color="" class="mx-10 my-2" @click="to_recipe(item.id)">
                     <div class="d-flex">
                       <v-avatar class="ma-3" size="125" tile>
                         <v-img :src="item.recipe_image_url"></v-img>
@@ -95,7 +95,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   data() {
@@ -108,15 +107,11 @@ export default {
     };
   },
   created() {
-    // this.searchRecipes();
     this.setData();
   },
   methods: {
     setData() {
       const data = this.$store.state.responseData;
-      console.log(data)
-      // 何らかの処理
-
       if (data) {
         this.requestData = data.request_data || {};
         this.recipes = data.recipes || [];
@@ -125,8 +120,9 @@ export default {
     go_back() {
       this.$router.push('/');
     },
-    to_recipe() {
-      this.$router.push('/');
+    to_recipe(recipeId) {
+      this.$store.commit('setFromSearchPage', true);
+      this.$router.push({ path: '/recipe', query: { id: recipeId } });
     },
   },
 };
