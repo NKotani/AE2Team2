@@ -28,7 +28,7 @@ export default new Router({
       component: Recipe,
     },
     {
-      path: '/searcher',
+      path: '/search',
       component: Searcher,
       props: true,
     },

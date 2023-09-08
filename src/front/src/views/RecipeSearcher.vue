@@ -4,32 +4,28 @@
         <v-container>
             <v-row>
                 <v-col>
-                    <v-app-bar
-                        dense
+                    <v-card
                         color="orange"
-                        elevation="3"
+                        elevation="0"
                         rounded
-                    >余った食材で検索 </v-app-bar>
+                        class="mx-2"
+                    >
+                        <v-card-item>
+                            <v-card-title>余った食材で検索</v-card-title>
+                        </v-card-item>
+                    </v-card>
                 </v-col>
             </v-row>
             <v-row>
-                <v-col>
-                <v-btn
-                    disabled
-                    elevation="2"
-                    large
-                    > 余っている食材 </v-btn>
-                </v-col>
                 <v-col>        
                     <v-btn
                     class="mx-2"
-                    fab
-                    density="compact"
                     @click="addCondition()"
                     >
                     <v-icon>
-                        mdi-plus
+                        mdi-plus-circle
                     </v-icon>
+                    余っている食材の追加
                     </v-btn>
                 </v-col>
             </v-row>
@@ -63,7 +59,12 @@
                             ></v-text-field>
                         </v-col>
                         <v-col>
-                        <v-btn @click="sendData()"  block class="mt-2"> 検索</v-btn> 
+                        <v-btn @click="sendData()"  block class="mt-2">
+                            検索
+                            <v-icon>
+                                mdi-magnify
+                            </v-icon>
+                        </v-btn> 
                         </v-col>
                     </v-row>
                     </v-container>
@@ -157,7 +158,7 @@ export default {
                 this.$store.commit('setResponseData', response.data);
 
                 // ルートを変更
-                this.$router.push('/searcher');
+                this.$router.push('/search');
             })
             .catch(error => {
                 console.error('Error:', error);
