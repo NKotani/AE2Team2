@@ -11,13 +11,6 @@ import (
 )
 
 func PostRecipe(c *gin.Context) {
-	// var requestData *models.RequestData
-
-	// if err := c.ShouldBindJSON(&requestData); err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	// 	return
-	// }
-
 	// リクエストボディを読み込む
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
