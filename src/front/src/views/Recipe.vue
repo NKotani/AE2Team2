@@ -205,7 +205,7 @@ export default {
       return wishlistData;
     },
     go_back() {
-      this.$router.push('/searcher');
+      this.$router.push('/search');
     },
     async to_list(recipe_id, recipe_name, ingredient) {
       const payload = {

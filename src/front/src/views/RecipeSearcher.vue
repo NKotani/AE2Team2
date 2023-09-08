@@ -157,7 +157,7 @@ export default {
                 this.$store.commit('setResponseData', response.data);
 
                 // ルートを変更
-                this.$router.push('/searcher');
+                this.$router.push('/search');
             })
             .catch(error => {
                 console.error('Error:', error);
