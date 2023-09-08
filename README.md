@@ -1,7 +1,9 @@
 # AE2Team2
+<img width="1169" alt="スクリーンショット 2023-09-08 10 33 37" src="https://github.com/NKotani/AE2Team2/assets/82433118/b90142b0-038c-42a8-ab2c-95d941ac14d2">
+
 ## 運用ルール
 * [GithubのProjects機能](https://github.com/users/NKotani/projects/3)を使って全体を管理
-* IsuueのDevelopmentにブランチを紐づける
+* IsuueのDevelopmentにブランチを紐づける(画像右下)
 <img width="985" alt="スクリーンショット 2023-09-05 10 23 32" src="https://github.com/NKotani/AE2Team2/assets/82433118/f4f099b8-b0bc-4379-b24b-86dab03b301a">
 
 * コメントになるべくスクショ貼る
