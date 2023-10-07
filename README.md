@@ -1,5 +1,10 @@
 # AE2Team2
 <img width="1169" alt="スクリーンショット 2023-09-08 10 33 37" src="https://github.com/NKotani/AE2Team2/assets/82433118/b90142b0-038c-42a8-ab2c-95d941ac14d2">
+<img width="616" alt="スクリーンショット 2023-10-07 14 32 07" src="https://github.com/NKotani/AE2Team2/assets/82433118/e22c0004-1c33-49c6-80da-697b75e3fe55">
+<img width="620" alt="スクリーンショット 2023-10-07 14 32 24" src="https://github.com/NKotani/AE2Team2/assets/82433118/dbf20968-4161-420e-a6de-0467c9c81976">
+
+## システム構成
+<img width="637" alt="スクリーンショット 2023-10-07 14 31 48" src="https://github.com/NKotani/AE2Team2/assets/82433118/5da4f9b7-0de4-4c72-8c13-08b8402d259d">
 
 ## 運用ルール
 * [GithubのProjects機能](https://github.com/users/NKotani/projects/3)を使って全体を管理
